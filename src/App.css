@@ -59,3 +59,23 @@
   align-items: center;
   flex-direction: row;
 }
+
+.first {
+  width: 100%;
+  height: 792px;
+  background-image: url(./assets/1_91_3840x2160_logo_admiral_hipper_ru_d496a3ed808723d8929f453103e0fffd.jpg);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.first > button {
+  margin-bottom: 100px;
+  width: 250px;
+  height: 70px;
+  border-radius: 25px;
+  background: none;
+  color: white;
+  font-size: large;
+  border: 0.2px solid;
+  cursor: pointer;
+}

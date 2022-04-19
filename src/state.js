@@ -6,7 +6,7 @@ let defaultState = [];
 let board = {
   id: "",
   isShip: false,
-  isShot: false,
+  isShoot: false,
   isCompleted: false,
   prev: {},
   next: {},
@@ -24,6 +24,7 @@ const State = createContext(defaultState);
 
 const ACTION_TYPES = {
   ADD_SHIP: "ADD_SHIP",
+  SHOOT: "SHOOT",
 };
 
 function reducer(state, action) {
@@ -31,7 +32,7 @@ function reducer(state, action) {
     case ACTION_TYPES.ADD_SHIP:
       const newState = state.map((item) => {
         return item.map((el, index) => {
-          if (el.id === action.id) {
+          if ( el.id === action.id) {
             return {
               ...el,
               isShip: !el.isShip,
@@ -42,6 +43,18 @@ function reducer(state, action) {
         });
       });
       return newState;
+    case ACTION_TYPES.SHOOT:
+      const newState2 = state.map((item) => {
+        return item.map((el, index) => {
+          if (el.id === action.id) {
+            return {
+              ...el,
+              isShoot: !el.isShoot,
+            };
+          } else return el;
+        });
+      });
+      return newState2;
   }
 }
 

@@ -7,6 +7,7 @@ const secondDefaultState = [
 
 const SECOND_ACTION_TYPES = {
   CHOSE_SHEEP: "CHOSE_SHEEP",
+  SHOOT: "SHOOT",
 };
 
 function secondReducer(secondState, action) {
@@ -23,6 +24,17 @@ function secondReducer(secondState, action) {
         if (el.isActive && el.boards.length < el.count) {
           return { ...el, boards: [...el.boards, action.id] };
         } else return { ...el, isActive: false };
+      });
+      return [...secondState];
+
+    case SECOND_ACTION_TYPES.SHOOT:
+      secondState = secondState.map((el) => {
+        if (el.boards.includes(action.id)) {
+          return {
+            ...el,
+            boards: [el.boards.splice(el.boards.indexOf(action.id), 1)],
+          };
+        } else return { ...el };
       });
       return [...secondState];
   }
