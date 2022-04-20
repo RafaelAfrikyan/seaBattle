@@ -4,7 +4,22 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  z-index: 20;
+  position: relative;
+  
 }
+.App::before{
+  z-index: -1;
+  position:absolute;
+    left:0;
+    top:0;
+    content: url('https://clipart.world/wp-content/uploads/2020/08/compass-png.png');
+    opacity:0.09;
+    background-repeat: no-repeat;
+    margin-top: 180px;
+    margin-left: 320px;
+}
+
 .forhorizont {
   display: flex;
   justify-content: center;
@@ -12,7 +27,7 @@
   margin-top: 10px;
   width: 600px;
   height: 600px;
-  /* border: 1px solid black; */
+  z-index: 10px;
 }
 .forhorizont2 {
   display: flex;
@@ -21,7 +36,7 @@
   margin-top: 10px;
   width: 600px;
   height: 600px;
-  /* border: 1px solid black; */
+z-index: 10;
   margin-top: 147px;
 }
 .horizontal {
@@ -30,6 +45,7 @@
   align-items: center;
   flex-direction: row;
   gap: 45px;
+  z-index: 20;
 }
 .vertical {
   margin-top: 20px;
@@ -38,6 +54,7 @@
   flex-direction: column;
   align-items: stretch;
   gap: 32px;
+  z-index: 20;
 }
 
 .items {
@@ -45,21 +62,23 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-
   gap: 2px;
+  z-index: 20;
 }
 
 .item {
   height: 50px;
   width: 50px;
-  border: 1px solid rgb(130, 125, 125);
+  border: 1px solid rgb(0, 0, 0);
   cursor: pointer;
+  z-index: 10;
 }
 .activeItem {
   background-color: rgb(185, 222, 222);
   height: 50px;
   width: 50px;
   border: 1px solid black;
+  z-index: 20;
 }
 
 .letters-with-board {
@@ -67,6 +86,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  z-index: 20;
 }
 .buttonWrap {
   margin-top: 50px;
@@ -74,6 +94,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  z-index: 20;
 }
 
 .first {
@@ -83,6 +104,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  z-index: 20;
 }
 .first > button {
   margin-bottom: 350px;
@@ -97,6 +119,7 @@
   border: 2px solid rgba(0, 0, 0, 0.9);
   cursor: pointer;
   box-shadow: 10px 12px 5px -5px rgba(34, 60, 80, 0.6);
+  z-index: 20;
 }
 .first > button:hover {
   border: 0.5px solid rgba(0, 0, 0, 1);
@@ -120,6 +143,8 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  z-index: 20;
+  
 }
 .wrapper2 {
   margin-top: 550px;
@@ -130,6 +155,8 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  z-index: 20;
+ 
 }
 .gago {
   display: flex;
@@ -137,30 +164,34 @@
   align-items: center;
   flex-direction: column;
   margin-left: 100px;
+  z-index: 20;
+
 }
 .gago > button {
   position: absolute;
-  top: 45px;
+  top: 70px;
+  right: 690px;
   width: 200px;
   height: 50px;
   border-radius: 25px;
   background: none;
   color: black;
   font-size: large;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border: 0.5px solid rgba(0, 0, 0, 0.7);
   cursor: pointer;
+  z-index: 20;
 }
 .gago > button:hover {
   border: 0.5px solid rgba(0, 0, 0, 1);
 }
 .AddShip {
   width: 150px;
-  height: 50px;
-  border-radius: 15px;
+  height: 56px;
+  border-radius: 5px;
   background: none;
   color: black;
   font-size: large;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border: 0.5px solid rgba(0, 0, 0, 0.7);
   cursor: pointer;
   margin: 20px;
 }
@@ -169,12 +200,12 @@
 }
 .Shoot {
   width: 150px;
-  height: 50px;
-  border-radius: 15px;
+  height: 56px;
+  border-radius: 5px;
   background: none;
   color: black;
   font-size: large;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border: 0.5px solid rgba(0, 0, 0, 0.7);
   cursor: pointer;
   margin-right: 190px;
 }
@@ -190,6 +221,8 @@
 html,
 body {
   height: 100%;
+  width: 100%;
+  
 }
 
 body {
@@ -200,6 +233,9 @@ body {
     #b7e8eb 100%
   );
   overflow: hidden;
+ 
+  
+  
 }
 
 .ocean {
@@ -248,4 +284,16 @@ body {
 }
 .endWave {
   display: none;
+}
+
+.photo {
+  position: relative;
+  height: 35px;
+  width: 35px;
+  bottom: 5px;
+  left: 25px;
+}
+.photo2 {
+  height: 50px;
+  width: 50px;
 }

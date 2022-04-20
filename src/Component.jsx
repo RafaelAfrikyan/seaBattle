@@ -1,5 +1,4 @@
-
-import {  ACTION_TYPES } from "./state";
+import { ACTION_TYPES } from "./state";
 import React, { useReducer, useState } from "react";
 import BasicSelect from "./Dropdown/Dropdown";
 import {
@@ -8,17 +7,17 @@ import {
   secondReducer,
 } from "./secondState";
 
-export default function Component({dispatch, state }) {
+export default function Component({ dispatch, state }) {
   let horizontal = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   let vertical = Array.from({ length: 10 }, (v, k) => k + 1);
- 
+
   const [secondState, secondDispatch] = useReducer(
     secondReducer,
     secondDefaultState
   );
   const [addShip, setAddShip] = useState(false);
   const [shoot, setShoot] = useState(false);
-  
+
   const [start, setStart] = useState(false);
 
   console.log(state);
@@ -61,18 +60,16 @@ export default function Component({dispatch, state }) {
     setStart(!start);
   };
   return (
-      
     <div className="gago">
-        
 
-      <button onClick={startGame}>Start</button>
+      <button className="start" onClick={startGame}>Start</button>
       <div className="gogo">
         <div>
-            
           <div className="wrapper">
             <div className="play">
               <div className="buttonWrap">
                 <BasicSelect
+                
                   addShip={addShip}
                   setAddShip={setAddShip}
                   secondDispatch={secondDispatch}
@@ -85,7 +82,6 @@ export default function Component({dispatch, state }) {
                 </button>
               </div>
               <div className="forhorizont">
-                  
                 <div className="vertical">
                   {vertical.map((el) => {
                     return <div>{el}</div>;
@@ -100,7 +96,6 @@ export default function Component({dispatch, state }) {
                   </div>
 
                   <div className="items">
-                      
                     {state.map((item) => {
                       return item.map((el) => {
                         return (
@@ -114,9 +109,18 @@ export default function Component({dispatch, state }) {
                             }`}
                           >
                             {el.isShoot && el.isShip ? (
-                              <div>yes</div>
+                              <img
+                                className="photo"
+                                src="https://bundlespace.com/data/catalog/premium-graphics/darts/png/dart-game.png"
+                                alt=""
+                              />
                             ) : (
-                              el.isShoot && <div>no</div>
+                              el.isShoot && (
+                                <img
+                                  className="photo2"
+                                  src="http://gotgame.com/wp-content/uploads/2014/04/duck-hunt.gif"
+                                />
+                              )
                             )}
                             {/* {el.isShoot &&
                               el.isShip &&
