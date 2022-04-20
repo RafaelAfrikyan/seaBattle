@@ -1,8 +1,8 @@
 const secondDefaultState = [
-  { isActive: false, count: 0, boards: [] },
-  { isActive: false, count: 0, boards: [] },
-  { isActive: false, count: 0, boards: [] },
-  { isActive: false, count: 0, boards: [] },
+  { isActive: false, isKill: false, count: 0, boards: [] },
+  { isActive: false, isKill: false, count: 0, boards: [] },
+  { isActive: false, isKill: false, count: 0, boards: [] },
+  { isActive: false, isKill: false, count: 0, boards: [] },
 ];
 
 const SECOND_ACTION_TYPES = {
@@ -29,13 +29,20 @@ function secondReducer(secondState, action) {
 
     case SECOND_ACTION_TYPES.SHOOT:
       secondState = secondState.map((el) => {
-        if (el.boards.includes(action.id)) {
+        if (el.boards.includes(action.id) || el.boards.length === 0) {
+          return {
+            ...el,
+            boards: [el.boards.splice(el.boards.indexOf(action.id), 1)],
+            isKill: true,
+          };
+        } else if (el.boards.includes(action.id)) {
           return {
             ...el,
             boards: [el.boards.splice(el.boards.indexOf(action.id), 1)],
           };
         } else return { ...el };
       });
+
       return [...secondState];
   }
 }

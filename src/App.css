@@ -1,14 +1,28 @@
 .App {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .forhorizont {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
-  margin-left: 300px;
+  margin-top: 10px;
   width: 600px;
   height: 600px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+}
+.forhorizont2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  width: 600px;
+  height: 600px;
+  /* border: 1px solid black; */
+  margin-top: 147px;
 }
 .horizontal {
   display: flex;
@@ -18,9 +32,12 @@
   gap: 45px;
 }
 .vertical {
+  margin-top: 20px;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
-  gap: 35px;
+  align-items: stretch;
+  gap: 32px;
 }
 
 .items {
@@ -28,19 +45,18 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 550px;
-  height: 550px;
+
   gap: 2px;
 }
 
 .item {
   height: 50px;
   width: 50px;
-  border: 1px solid black;
+  border: 1px solid rgb(130, 125, 125);
   cursor: pointer;
 }
 .activeItem {
-  background-color: red;
+  background-color: rgb(185, 222, 222);
   height: 50px;
   width: 50px;
   border: 1px solid black;
@@ -63,19 +79,173 @@
 .first {
   width: 100%;
   height: 792px;
-  background-image: url(./assets/1_91_3840x2160_logo_admiral_hipper_ru_d496a3ed808723d8929f453103e0fffd.jpg);
+  background-image: url("https://fs-prod-cdn.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_dsiware_8/SI_DSiWare_SeaBattle_image1600w.jpg");
   display: flex;
   justify-content: center;
   align-items: flex-end;
 }
 .first > button {
-  margin-bottom: 100px;
+  margin-bottom: 350px;
+  position: absolute;
+  right: 50px;
   width: 250px;
   height: 70px;
   border-radius: 25px;
   background: none;
-  color: white;
+  color: black;
   font-size: large;
-  border: 0.2px solid;
+  border: 2px solid rgba(0, 0, 0, 0.9);
   cursor: pointer;
+  box-shadow: 10px 12px 5px -5px rgba(34, 60, 80, 0.6);
+}
+.first > button:hover {
+  border: 0.5px solid rgba(0, 0, 0, 1);
+}
+.massages {
+  width: 150px;
+  height: 500px;
+  border: 1px solid black;
+  margin-left: 25px;
+}
+.play {
+  /* display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column; */
+  margin-left: 20px;
+}
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.wrapper2 {
+  margin-top: 550px;
+}
+.gogo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.gago {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 100px;
+}
+.gago > button {
+  position: absolute;
+  top: 45px;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background: none;
+  color: black;
+  font-size: large;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.gago > button:hover {
+  border: 0.5px solid rgba(0, 0, 0, 1);
+}
+.AddShip {
+  width: 150px;
+  height: 50px;
+  border-radius: 15px;
+  background: none;
+  color: black;
+  font-size: large;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  margin: 20px;
+}
+.AddShip:hover {
+  border: 0.5px solid rgba(0, 0, 0, 1);
+}
+.Shoot {
+  width: 150px;
+  height: 50px;
+  border-radius: 15px;
+  background: none;
+  color: black;
+  font-size: large;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  margin-right: 190px;
+}
+.Shoot:hover {
+  border: 0.5px solid rgba(0, 0, 0, 1);
+}
+.kill {
+  /* height: 500px;
+  width: 500px;
+  border: 1px solid black; */
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(
+    ellipse at center,
+    #fffeea 0%,
+    #fffeea 35%,
+    #b7e8eb 100%
+  );
+  overflow: hidden;
+}
+
+.ocean {
+  height: 2%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  /* background: #02556a; */
+}
+
+.wave {
+  background: url(https://cdn.kcak11.com/codepen_assets/wave_animation/wave.svg)
+    repeat-x;
+  position: absolute;
+  top: -120px;
+  width: 6400px;
+  height: 278px;
+  animation: wave 5s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.wave:nth-of-type(2) {
+  top: -145px;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+    swell 7s ease -1.25s infinite;
+  opacity: 1;
+}
+
+@keyframes wave {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -1600px;
+  }
+}
+@keyframes swell {
+  0%,
+  100% {
+    transform: translate3d(0, -25px, 0);
+  }
+  50% {
+    transform: translate3d(0, 5px, 0);
+  }
+}
+.endWave {
+  display: none;
 }
