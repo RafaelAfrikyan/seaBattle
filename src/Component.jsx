@@ -21,7 +21,7 @@ export default function Component({ dispatch, state }) {
   const [start, setStart] = useState(false);
 
   console.log(state);
-  console.log(secondState);
+ 
 
   function chooseItem(e) {
     addShip &&
@@ -50,7 +50,7 @@ export default function Component({ dispatch, state }) {
       });
     }
   }
-  console.log(addShip);
+
 
   function shootButton() {
     setAddShip(false);
@@ -61,15 +61,13 @@ export default function Component({ dispatch, state }) {
   };
   return (
     <div className="gago">
-
-      <button className="start" onClick={startGame}>Start</button>
+      <button onClick={startGame}>Start</button>
       <div className="gogo">
         <div>
           <div className="wrapper">
             <div className="play">
               <div className="buttonWrap">
                 <BasicSelect
-                
                   addShip={addShip}
                   setAddShip={setAddShip}
                   secondDispatch={secondDispatch}

@@ -7,6 +7,7 @@ import { defaultState, State, reducer, ACTION_TYPES } from "./state";
 function App() {
   const [state, dispatch] = useReducer(reducer, defaultState);
   const [start, setStart] = useState(false);
+  
   return (
     <div className="App">
       {!start && <Main state={state} setStart={setStart} dispatch={dispatch} />}

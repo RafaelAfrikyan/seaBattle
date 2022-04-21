@@ -3,23 +3,23 @@ import { createContext } from "react";
 let horizontal = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 let vertical = Array.from({ length: 10 }, (v, k) => k + 1);
 let defaultState = [];
-let board = {
-  id: "",
-  isShip: false,
-  isShoot: false,
-  isCompleted: false,
-  prev: null,
-  next: null,
-  shipLength: [],
-};
 
-for (let i = 0; i < vertical.length; i++) {
-  let innerArr = horizontal.map((el) => {
-    return { ...board, id: `${vertical[i]}${el}` };
+vertical.map((item, i) => {
+  let innerArr = horizontal.map((el, index) => {
+    return {
+      id: `${item}${el}`,
+      isShip: false,
+      isShoot: false,
+      isKill: false,
+      shipLength: [],
+      prev: null,
+      next: null,
+    };
   });
   defaultState.push(innerArr);
-}
+});
 
+console.log(defaultState);
 const State = createContext(defaultState);
 
 const ACTION_TYPES = {
@@ -31,22 +31,24 @@ let newState = [];
 function reducer(state, action) {
   switch (action.type) {
     case ACTION_TYPES.START_GAME:
-      newState = state.map((item) => {
+      newState = state.map((item, i) => {
         return item.map((el, index) => {
           if (el) {
             return {
               ...el,
-              prev: item[index - 1] || null,
-              next: item[index + 1] || null,
+              prev: state[i][index - 1],
+              next: state[i][index + 1],
             };
           } else return el;
         });
       });
       return newState;
     case ACTION_TYPES.ADD_SHIP:
-      newState = state.map((item) => {
+      newState = state.map((item, i) => {
         return item.map((el, index) => {
           if (el.id === action.id) {
+            state[i][index - 1].next.isShip = true;
+            state[i][index + 1].prev.isShip = true;
             return {
               ...el,
               isShip: !el.isShip,
@@ -56,14 +58,57 @@ function reducer(state, action) {
       });
       return newState;
     case ACTION_TYPES.SHOOT:
-      newState = state.map((item) => {
-        return item.map((el) => {
+      newState = state.map((item, i) => {
+        return item.map((el, index) => {
           if (el.id === action.id) {
-            return {
-              ...el,
-              isShoot: !el.isShoot,
-              isCompleted: true,
-            };
+            if (
+              state[i][index - 1].isShip === true &&
+              state[i][index - 1].isShoot === true &&
+              state[i][index + 1].isShip === true &&
+              state[i][index + 1].isShoot === true
+            ) {
+              return {
+                ...el,
+                isShoot: true,
+                isKill: true,
+              };
+            } else if (
+              state[i][index - 1].isShip === false &&
+              state[i][index + 1].isShip === false
+            ) {
+              return {
+                ...el,
+                isShoot: true,
+                isKill: true,
+              };
+            } else if (
+              state[i][index - 1].isShip === false &&
+              state[i][index + 1].isShip === true &&
+              state[i][index + 1].isShoot === true
+            ) {
+              return {
+                ...el,
+                isShoot: true,
+                isKill: true,
+              };
+            } else if (
+              state[i][index + 1].isShip === false &&
+              state[i][index - 1].isShip === true &&
+              state[i][index - 1].isShoot === true
+            ) {
+              return {
+                ...el,
+                isShoot: true,
+                isKill: true,
+              };
+            } else {
+              state[i][index - 1].next.isShoot = true;
+              state[i][index + 1].prev.isShoot = true;
+              return {
+                ...el,
+                isShoot: true,
+              };
+            }
           } else return el;
         });
       });
