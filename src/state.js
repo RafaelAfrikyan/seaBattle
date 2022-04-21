@@ -12,14 +12,13 @@ vertical.map((item, i) => {
       isShoot: false,
       isKill: false,
       shipLength: [],
-      prev: null,
-      next: null,
+      prev: {},
+      next: {},
     };
   });
   defaultState.push(innerArr);
 });
 
-console.log(defaultState);
 const State = createContext(defaultState);
 
 const ACTION_TYPES = {
@@ -36,8 +35,6 @@ function reducer(state, action) {
           if (el) {
             return {
               ...el,
-              prev: state[i][index - 1],
-              next: state[i][index + 1],
             };
           } else return el;
         });
@@ -47,12 +44,76 @@ function reducer(state, action) {
       newState = state.map((item, i) => {
         return item.map((el, index) => {
           if (el.id === action.id) {
-            state[i][index - 1].next.isShip = true;
-            state[i][index + 1].prev.isShip = true;
-            return {
-              ...el,
-              isShip: !el.isShip,
-            };
+            if (state[i][index - 1].isShip && state[i][index + 1].isShip) {
+              state[i][index - 1].next = {...el, isShip: true};
+              state[i][index + 1].prev = {...el, isShip: true};
+              return {
+                ...el,
+                isShip: !el.isShip,
+                next: state[i][index + 1],
+                prev: state[i][index - 1],
+              };
+            } else if (
+              state[i][index - 1].isShip &&
+              !state[i][index + 1].isShip
+            ) {
+              state[i][index - 1].next = {...el, isShip: true};
+              return {
+                ...el,
+                isShip: !el.isShip,
+                prev: { ...state[i][index - 1] },
+              };
+            } else if (
+              state[i][index + 1].isShip &&
+              !state[i][index - 1].isShip
+            ) {
+              state[i][index + 1].prev = {...el, isShip: true};
+              return {
+                ...el,
+                isShip: !el.isShip,
+                next: state[i][index + 1],
+              };
+            } else if (
+              state[i - 1] &&
+              state[i - 1][index].isShip &&
+              state[i + 1] &&
+              state[i + 1][index].isShip
+            ) {
+              state[i - 1][index].next = {...el, isShip: true};
+              state[i + 1][index].prev = {...el, isShip: true};
+              return {
+                ...el,
+                isShip: !el.isShip,
+                next: state[i + 1][index],
+                prev: state[i - 1][index],
+              };
+            } else if (
+              state[i - 1] &&
+              state[i - 1][index].isShip &&
+              state[i + 1] &&
+              !state[i + 1][index].isShip
+            ) {
+              state[i - 1][index].next = {...el, isShip: true};
+              return {
+                ...el,
+                isShip: !el.isShip,
+                prev: state[i - 1][index],
+              };
+              } else if (
+                state[i + 1][index].isShip &&
+                state[i - 1][index].isShip
+              ) {
+                 state[i + 1][index].prev = {...el, isShip: true};
+                return {
+                  ...el,
+                  isShip: !el.isShip,
+                  next: state[i + 1][index],
+                };
+            } else
+              return {
+                ...el,
+                isShip: !el.isShip,
+              };
           } else return el;
         });
       });
