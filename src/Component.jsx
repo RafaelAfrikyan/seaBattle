@@ -17,11 +17,9 @@ export default function Component({ dispatch, state }) {
   );
   const [addShip, setAddShip] = useState(false);
   const [shoot, setShoot] = useState(false);
+  const [kill, setKill] = useState(false);
 
   const [start, setStart] = useState(false);
-
-  console.log(state);
- 
 
   function chooseItem(e) {
     addShip &&
@@ -51,7 +49,6 @@ export default function Component({ dispatch, state }) {
     }
   }
 
-
   function shootButton() {
     setAddShip(false);
     setShoot(!shoot);
@@ -67,11 +64,7 @@ export default function Component({ dispatch, state }) {
           <div className="wrapper">
             <div className="play">
               <div className="buttonWrap">
-                <BasicSelect
-                  addShip={addShip}
-                  setAddShip={setAddShip}
-                  secondDispatch={secondDispatch}
-                />
+                <BasicSelect secondDispatch={secondDispatch} />
                 <button className="AddShip" onClick={() => setAddShip(true)}>
                   Add Ship
                 </button>

@@ -284,3 +284,10 @@ body {
   height: 50px;
   width: 50px;
 }
+.playBtn {
+  padding: 15px 20px;
+  border: 1px solid white;
+  border-radius: 4px;
+  margin-bottom: 180px;
+  cursor: pointer;
+}

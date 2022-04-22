@@ -30,6 +30,7 @@ function secondReducer(secondState, action) {
     case SECOND_ACTION_TYPES.SHOOT:
       secondState = secondState.map((el) => {
         if (el.boards.includes(action.id) || el.boards.length === 0) {
+        
           return {
             ...el,
             boards: [el.boards.splice(el.boards.indexOf(action.id), 1)],

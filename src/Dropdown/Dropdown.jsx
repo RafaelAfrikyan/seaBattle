@@ -14,8 +14,7 @@ export default function BasicSelect({ setAddShip, addShip, secondDispatch }) {
     secondDispatch({
       type: SECOND_ACTION_TYPES.CHOSE_SHEEP,
       number: e.target.value,
-    }); 
-    setAddShip(false);
+    });
   };
   return (
     <Box sx={{ minWidth: 120 }}>
