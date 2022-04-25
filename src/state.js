@@ -19,7 +19,6 @@ vertical.map((item, i) => {
   defaultState.push(innerArr);
 });
 
-console.log(defaultState);
 const State = createContext(defaultState);
 
 const ACTION_TYPES = {
@@ -27,92 +26,53 @@ const ACTION_TYPES = {
   SHOOT: "SHOOT",
   START_GAME: "START_GAME",
 };
-let newState = [];
+
 function reducer(state, action) {
   switch (action.type) {
     case ACTION_TYPES.START_GAME:
-      newState = state.map((item, i) => {
-        return item.map((el, index) => {
+      state.forEach((item, i) => {
+        item.map((el, index) => {
           if (el) {
-            return {
-              ...el,
-              prev: state[i][index - 1],
-              next: state[i][index + 1],
-            };
+            el.next = state[i][index + 1];
+            el.prev = state[i][index - 1];
           } else return el;
         });
       });
-      return newState;
+      return state;
     case ACTION_TYPES.ADD_SHIP:
-      newState = state.map((item, i) => {
-        return item.map((el, index) => {
+      state.forEach((item, i) => {
+        item.map((el, index) => {
           if (el.id === action.id) {
-            state[i][index - 1].next.isShip = true;
-            state[i][index + 1].prev.isShip = true;
-            return {
-              ...el,
-              isShip: !el.isShip,
-            };
-          } else return el;
-        });
-      });
-      return newState;
-    case ACTION_TYPES.SHOOT:
-      newState = state.map((item, i) => {
-        return item.map((el, index) => {
-          if (el.id === action.id) {
-            if (
-              state[i][index - 1].isShip === true &&
-              state[i][index - 1].isShoot === true &&
-              state[i][index + 1].isShip === true &&
-              state[i][index + 1].isShoot === true
-            ) {
-              return {
-                ...el,
-                isShoot: true,
-                isKill: true,
-              };
-            } else if (
-              state[i][index - 1].isShip === false &&
-              state[i][index + 1].isShip === false
-            ) {
-              return {
-                ...el,
-                isShoot: true,
-                isKill: true,
-              };
-            } else if (
-              state[i][index - 1].isShip === false &&
-              state[i][index + 1].isShip === true &&
-              state[i][index + 1].isShoot === true
-            ) {
-              return {
-                ...el,
-                isShoot: true,
-                isKill: true,
-              };
-            } else if (
-              state[i][index + 1].isShip === false &&
-              state[i][index - 1].isShip === true &&
-              state[i][index - 1].isShoot === true
-            ) {
-              return {
-                ...el,
-                isShoot: true,
-                isKill: true,
-              };
-            } else {
-              state[i][index - 1].next.isShoot = true;
-              state[i][index + 1].prev.isShoot = true;
-              return {
-                ...el,
-                isShoot: true,
-              };
+            if (state[i][index + 1].isShip) {
+              state[i][index + 1].prev = el;
+              el.next = state[i][index + 1];
             }
+            if (state[i][index - 1].isShip) {
+              state[i][index - 1].next = el;
+              el.prev = state[i][index - 1];
+            }
+            if (state[i + 1][index].isShip) {
+              state[i + 1][index].prev = el;
+              el.next = state[i + 1][index];
+            }
+            if (state[i - 1][index].isShip) {
+              state[i - 1][index].next = el;
+              el.prev = state[i - 1][index];
+            }
+            return (el.isShip = true);
           } else return el;
         });
       });
-      return newState;
+      return state;
+    case ACTION_TYPES.SHOOT:
+      state.forEach((item, i) => {
+        item.map((el, index) => {
+          if (el.id === action.id) {
+            return (el.isShoot = true);
+          } else return el;
+        });
+      });
+      return state;
   }
 }
 
