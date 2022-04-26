@@ -68,6 +68,19 @@ function reducer(state, action) {
       state.forEach((item, i) => {
         item.map((el, index) => {
           if (el.id === action.id) {
+            if (
+              (el.next.isShip &&
+                el.next.isShoot &&
+                el.prev.isShip &&
+                el.prev.isShoot) ||
+              (!el.next.isShip && !el.prev.isShip)
+            ) {
+              el.isKill = true;
+            } else if (el.next.isShip && el.next.isShoot && !el.prev.isShip) {
+              el.isKill = true;
+            } else if (el.prev.isShip && el.prev.isShoot && !el.next.isShip) {
+              el.isKill = true;
+            }
             return (el.isShoot = true);
           } else return el;
         });

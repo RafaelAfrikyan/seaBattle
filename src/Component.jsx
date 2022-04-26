@@ -21,7 +21,6 @@ export default function Component({ dispatch, state }) {
   const [start, setStart] = useState(false);
 
   console.log(state);
- 
 
   function chooseItem(e) {
     addShip &&
@@ -50,7 +49,6 @@ export default function Component({ dispatch, state }) {
       });
     }
   }
-
 
   function shootButton() {
     setAddShip(false);
@@ -103,7 +101,11 @@ export default function Component({ dispatch, state }) {
                             key={el.id}
                             id={el.id}
                             className={`item ${
-                              el.isShip && !start ? "activeItem" : ""
+                              el.isShip && !el.isKill && !start
+                                ? "activeItem"
+                                : el.isShip && el.isKill && start
+                                ? "activeItem2"
+                                : ""
                             }`}
                           >
                             {el.isShoot && el.isShip ? (

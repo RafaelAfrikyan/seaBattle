@@ -77,6 +77,12 @@
   width: 50px;
   border: 1px solid black;
 }
+.activeItem2 {
+  background-color: rgb(255, 0, 0);
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+}
 
 .letters-with-board {
   display: flex;
