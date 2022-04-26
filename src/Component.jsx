@@ -21,6 +21,11 @@ export default function Component({ dispatch, state }) {
 
   const [start, setStart] = useState(false);
 
+<<<<<<< HEAD
+=======
+  console.log(state);
+
+>>>>>>> 106c80f
   function chooseItem(e) {
     addShip &&
       secondState.map((el) => {
@@ -96,7 +101,11 @@ export default function Component({ dispatch, state }) {
                             key={el.id}
                             id={el.id}
                             className={`item ${
-                              el.isShip && !start ? "activeItem" : ""
+                              el.isShip && !el.isKill && !start
+                                ? "activeItem"
+                                : el.isShip && el.isKill && start
+                                ? "activeItem2"
+                                : ""
                             }`}
                           >
                             {el.isShoot && el.isShip ? (

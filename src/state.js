@@ -26,24 +26,30 @@ const ACTION_TYPES = {
   SHOOT: "SHOOT",
   START_GAME: "START_GAME",
 };
-let newState = [];
+
 function reducer(state, action) {
   switch (action.type) {
     case ACTION_TYPES.START_GAME:
-      newState = state.map((item, i) => {
-        return item.map((el, index) => {
+      state.forEach((item, i) => {
+        item.map((el, index) => {
           if (el) {
+<<<<<<< HEAD
             return {
               ...el,
             };
+=======
+            el.next = state[i][index + 1];
+            el.prev = state[i][index - 1];
+>>>>>>> 106c80f
           } else return el;
         });
       });
-      return newState;
+      return state;
     case ACTION_TYPES.ADD_SHIP:
-      newState = state.map((item, i) => {
-        return item.map((el, index) => {
+      state.forEach((item, i) => {
+        item.map((el, index) => {
           if (el.id === action.id) {
+<<<<<<< HEAD
             if (state[i][index - 1].isShip && state[i][index + 1].isShip) {
               state[i][index - 1].next = { ...el, isShip: true };
               state[i][index + 1].prev = { ...el, isShip: true };
@@ -127,15 +133,35 @@ function reducer(state, action) {
                 ...el,
                 isShip: !el.isShip,
               };
+=======
+            if (state[i][index + 1].isShip) {
+              state[i][index + 1].prev = el;
+              el.next = state[i][index + 1];
+            }
+            if (state[i][index - 1].isShip) {
+              state[i][index - 1].next = el;
+              el.prev = state[i][index - 1];
+            }
+            if (state[i + 1][index].isShip) {
+              state[i + 1][index].prev = el;
+              el.next = state[i + 1][index];
+            }
+            if (state[i - 1][index].isShip) {
+              state[i - 1][index].next = el;
+              el.prev = state[i - 1][index];
+            }
+            return (el.isShip = true);
+>>>>>>> 106c80f
           } else return el;
         });
       });
-      return newState;
+      return state;
     case ACTION_TYPES.SHOOT:
-      newState = state.map((item, i) => {
-        return item.map((el, index) => {
+      state.forEach((item, i) => {
+        item.map((el, index) => {
           if (el.id === action.id) {
             if (
+<<<<<<< HEAD
               !state[i][index - 1].isShip &&
               !state[i][index + 1].isShip &&
               !state[i - 1][index].isShip &&
@@ -284,10 +310,25 @@ function reducer(state, action) {
                 ...el,
                 isShoot: !el.isShoot,
               };
+=======
+              (el.next.isShip &&
+                el.next.isShoot &&
+                el.prev.isShip &&
+                el.prev.isShoot) ||
+              (!el.next.isShip && !el.prev.isShip)
+            ) {
+              el.isKill = true;
+            } else if (el.next.isShip && el.next.isShoot && !el.prev.isShip) {
+              el.isKill = true;
+            } else if (el.prev.isShip && el.prev.isShoot && !el.next.isShip) {
+              el.isKill = true;
+            }
+            return (el.isShoot = true);
+>>>>>>> 106c80f
           } else return el;
         });
       });
-      return newState;
+      return state;
   }
 }
 
